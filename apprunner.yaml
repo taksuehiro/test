@@ -2,14 +2,11 @@ version: 1.0
 runtime: python3
 build:
   commands:
-    build:
+    pre-build:
       - python -m pip install --upgrade pip setuptools wheel
+    build:
       - pip install -r requirements.txt
 run:
   command: gunicorn -w 2 -k gthread -b 0.0.0.0:8080 app:app
   network:
     port: 8080
-env:
-  - name: PYTHONUNBUFFERED
-    value: "1"
-
